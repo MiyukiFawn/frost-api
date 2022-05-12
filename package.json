@@ -1,19 +1,22 @@
 {
-    "name": "api_faustino",
+    "name": "pso2api",
     "version": "1.0.0",
     "description": "",
-    "main": "source/server.ts",
+    "main": "server.ts",
     "scripts": {
-        "start": "nodemon source/server.ts",
-        "build": "del build && prettier --write source/ && tsc"
+        "start": "nodemon server.ts",
+        "build": "del build && prettier --write / && tsc"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
+        "express-validator": "^6.14.0",
         "joi": "^17.4.2",
-        "mysql2": "^2.3.2"
+        "mysql2": "^2.3.2",
+        "nodemon": "^2.0.16",
+        "ts-node": "^10.7.0"
     },
     "devDependencies": {
         "@types/dotenv": "^8.2.0",
