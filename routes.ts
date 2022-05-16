@@ -1,20 +1,17 @@
 import express from "express";
 
-/** Controllers */
-import sampleController from "controllers/test";
-
-import testValidation from "middlewares/testValidation";
 import validateId from "middlewares/validateId";
+import auth from "middlewares/auth";
+
+/** IMPORT CONTROLLERS */
+import userController from "controllers/user";
 
 const router = express.Router();
 
 /** --- ROUTES --- */
+router.get("/user", userController.getAllUsers);
+router.get("/user/:id", validateId, userController.getSingleUser);
+router.post("/user", userController.postUser);
+router.post("/auth", userController.auth);
 /** SAMPLE */
-
-router.get("/test", sampleController.getTests);
-router.get("/test/:id", validateId, sampleController.getTest);
-router.post("/test", testValidation, sampleController.postTest);
-router.put("/test/:id", validateId, testValidation, sampleController.putTest);
-router.delete("/test/:id", sampleController.remove);
-
 export = router;
