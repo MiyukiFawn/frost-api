@@ -1,5 +1,5 @@
 import mysql, { ResultSetHeader, RowDataPacket } from "mysql2";
-import config from "./config";
+import config from "config";
 
 const params: mysql.PoolOptions = {
   user: config.mysql.user,

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import logging from "config/logging";
-import conn from "model/test";
+import logging from "logging";
+import conn from "models/test";
 
 import { objectsAreEqual } from "helpers/mainHelpers";
 

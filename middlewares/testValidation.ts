@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
-import Test from "../interfaces/test";
+import Test from "interfaces/test";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const schema = Joi.object({

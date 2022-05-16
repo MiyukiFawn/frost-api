@@ -21,6 +21,7 @@
     "devDependencies": {
         "@types/dotenv": "^8.2.0",
         "@types/express": "^4.17.13",
-        "@types/joi": "^17.2.3"
+        "@types/joi": "^17.2.3",
+        "tsconfig-paths": "^4.0.0"
     }
 }
