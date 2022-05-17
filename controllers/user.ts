@@ -4,7 +4,7 @@ import Joi from "joi";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { logError500, objectsAreEqual } from "helpers/mainHelpers";
+import { logError500 } from "helpers/mainHelpers";
 
 import { DBUser, User } from "interfaces/user";
 import logging from "logging";

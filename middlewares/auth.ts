@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import config from "config";
 import jwt from "jsonwebtoken";
 
+const NAMESPACE = "AUTH MIDDLEWARE";
+
 export default async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
