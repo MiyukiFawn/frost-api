@@ -1,5 +1,5 @@
 import http from "http";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 
 import logging from "logging";
 import config from "config";
@@ -10,7 +10,7 @@ const NAMESPACE = "Server";
 const router = express();
 
 /** Logging the request */
-router.use((req, res, next) => {
+router.use((req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
 
   res.on("finish", () => {
@@ -27,7 +27,7 @@ router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 
 /** Rules of the API */
-router.use((req, res, next) => {
+router.use((req: Request, res: Response, next: NextFunction) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 
@@ -42,7 +42,7 @@ router.use((req, res, next) => {
 router.use("/", routes);
 
 /** Error Handling */
-router.use((req, res, next) => {
+router.use((_, res: Response) => {
   const error = new Error("not found");
 
   return res.status(404).json({ message: error.message });

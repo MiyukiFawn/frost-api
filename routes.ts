@@ -1,17 +1,13 @@
 import express from "express";
-
-import validateId from "middlewares/validateId";
-import auth from "middlewares/auth";
-
-/** IMPORT CONTROLLERS */
-import userController from "controllers/user";
-
+/** IMPORT ROUTERS */
 const router = express.Router();
 
 /** --- ROUTES --- */
-router.get("/user", userController.getAllUsers);
-router.get("/user/:id", validateId, userController.getSingleUser);
-router.post("/user", userController.postUser);
-router.post("/auth", userController.auth);
+router.use("/ping", (req, res) => {
+  return res.status(200).json({
+      message: "pong",
+  })
+});
+
 /** SAMPLE */
 export = router;
