@@ -22,9 +22,20 @@ const SERVER = {
   port: SERVER_PORT,
 };
 
+const BCRYPT = {
+  saltOrRounds: process.env.BCRYPTROUNDS || 10,
+};
+
+const JWT = {
+  secret: process.env.JWTSECRET || "token",
+  expides: process.env.JWTEXPIRES || 86400,
+};
+
 const config = {
   mysql: MYSQL,
   server: SERVER,
+  bcrypt: BCRYPT,
+  jwt: JWT,
 };
 
 export default config;
