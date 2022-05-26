@@ -37,6 +37,8 @@
       "controllers/*": ["./controllers/*"],
       "helpers/*": ["./helpers/*"],
       "interfaces/*": ["./interfaces/*"],
+      "validations/*": ["./validations/*"],
+      "error/*": ["errors/*"],
       "middlewares/*": ["./middlewares/*"],
       "routes": ["./routes.ts"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

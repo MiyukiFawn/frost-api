@@ -1,10 +1,12 @@
+require("express-async-errors");
 import http from "http";
 import express, { Request, Response, NextFunction } from "express";
-
 import logging from "logging";
 import config from "config";
 
 import routes from "routes";
+import apiErrorHandler from "middlewares/api_error_handler";
+import ApiError from "error/ApiError";
 
 const NAMESPACE = "Server";
 const router = express();
@@ -42,11 +44,10 @@ router.use((req: Request, res: Response, next: NextFunction) => {
 router.use("/", routes);
 
 /** Error Handling */
-router.use((_, res: Response) => {
-  const error = new Error("not found");
-
-  return res.status(404).json({ message: error.message });
+router.use((req: Request, res: Response) => {
+  throw ApiError.notFound();
 });
+router.use(apiErrorHandler);
 
 /** Create the server */
 const httpServer = http.createServer(router);
