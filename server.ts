@@ -1,4 +1,4 @@
-require("express-async-errors");
+import "express-async-errors";
 import http from "http";
 import express, { Request, Response, NextFunction } from "express";
 import logging from "logging";
@@ -35,7 +35,7 @@ router.use((req: Request, res: Response, next: NextFunction) => {
 
   if (req.method == "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST PUT");
-    return res.status(200).json({});
+    return res.status(200).json(["GET PATCH DELETE POST PUT"]);
   }
   next();
 });

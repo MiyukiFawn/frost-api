@@ -12,7 +12,8 @@ const SERVER = {
 // JWT CONFIG
 const JWT = {
   secret: process.env.JWT_SECRET || "token",
-  expides: process.env.JWT_EXPIRES || 86400,
+  access_expides: process.env.JWT_ACCESS_EXPIRES || 900,
+  refresh_expides: process.env.JWT_REFRESH_EXPIRES || 2592000,
 };
 
 const config = {

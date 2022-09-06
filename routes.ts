@@ -1,7 +1,10 @@
 import express from "express";
 import logging from "logging";
 /** IMPORT ROUTERS */
-import user_routes from "routes/user";
+import user_routes from "routes/auth";
+
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
@@ -27,7 +30,7 @@ router.get("/ping", async (req, res) => {
   })
 });
 
-router.use("/user", user_routes);
+router.use("/auth", user_routes);
 
 /** SAMPLE */
 export = router;

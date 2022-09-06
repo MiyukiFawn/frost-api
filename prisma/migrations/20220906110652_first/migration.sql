@@ -16,8 +16,8 @@ CREATE TABLE `Refresh_Token` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL,
     `refresh_token` VARCHAR(350) NOT NULL,
-    `status` BOOLEAN NOT NULL DEFAULT true,
-    `expires_at` DATETIME(3) NOT NULL,
+    `valid` BOOLEAN NOT NULL DEFAULT true,
+    `expires_at` INTEGER NOT NULL,
     `creation_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)

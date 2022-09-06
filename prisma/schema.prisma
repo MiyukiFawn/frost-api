@@ -1,6 +1,7 @@
 // CONFIG
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
@@ -25,7 +26,7 @@ model Refresh_Token {
   user          User     @relation(fields: [user_id], references: [id])
   user_id       Int
   refresh_token String   @db.VarChar(350)
-  status        Boolean  @default(true)
-  expires_at    DateTime
+  valid         Boolean  @default(true)
+  expires_at    Int
   creation_date DateTime @default(now())
 }

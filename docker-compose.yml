@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: database
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+
+  app:
+    container_name: 'api'
+    build: .
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+    links:
+      - "db:database"
