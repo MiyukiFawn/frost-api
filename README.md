@@ -1,5 +1,7 @@
 <h1 align="center">
   <br>
+  <img src="https://raw.githubusercontent.com/GEYWYD/frost-api/main/Frost-Star-icon.png" alt="Markdownify" width="200"></a>
+  <br>
   Frost API
   <br>
 </h1>
