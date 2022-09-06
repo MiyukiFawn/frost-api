@@ -73,6 +73,7 @@ services:
 ```
 
 Feel free to use it as a template for your own REST API, learn new stuff or just messing aroud :D
+
 Have fun!
 
 ---
