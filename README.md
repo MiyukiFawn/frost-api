@@ -31,7 +31,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 $ git clone https://github.com/GEYWYD/frost-api
 
 # Go into the repository
-$ cd fros-api
+$ cd frost-api
 # Create docker containers
 $ docker-compose up
 
