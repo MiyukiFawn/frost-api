@@ -34,12 +34,12 @@
     "paths": {
       "config": ["src/config.ts"],
       "debuger": ["src/debuger.ts"],
-      "controllers/*": ["./controllers/*"],
-      "helpers/*": ["./helpers/*"],
-      "interfaces/*": ["./interfaces/*"],
-      "validations/*": ["./validations/*"],
-      "error/*": ["errors/*"],
-      "middlewares/*": ["./middlewares/*"],
+      "controllers/*": ["src/controllers/*"],
+      "helpers/*": ["src/helpers/*"],
+      "interfaces/*": ["src/interfaces/*"],
+      "validations/*": ["src/validations/*"],
+      "error/*": ["src/errors/*"],
+      "middlewares/*": ["src/middlewares/*"],
       "routes": ["src/routes.ts"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
