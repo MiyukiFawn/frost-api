@@ -1,5 +1,5 @@
 {
-  "name": "pso2api",
+  "name": "frost-api",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
@@ -7,7 +7,7 @@
     "start": "nodemon src/server.ts",
     "build": "del build && prettier --write / && tsc"
   },
-  "author": "",
+  "author": "Miyuki Fawn",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.16.2",
