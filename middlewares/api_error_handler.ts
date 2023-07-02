@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import ApiError from "error/ApiError";
-import logging from "logging";
+import Debuger from "src/debuger";
+
+const Debug = Debuger("SERVER");
 
 function apiErrorHandler(err: TypeError, req: Request, res: Response, next: NextFunction) {
-  logging.error("SERVER", err.stack + "\n", err.message);
+  Debug.error(err.stack + "\n", err.message);
   
   if (err instanceof ApiError) return res.status(err.code).json(err.error);
   

@@ -1,23 +1,23 @@
 import "express-async-errors";
 import http from "http";
 import express, { Request, Response, NextFunction } from "express";
-import logging from "logging";
 import config from "config";
+
+import Debuger from "debuger"
 
 import routes from "routes";
 import apiErrorHandler from "middlewares/api_error_handler";
 import ApiError from "error/ApiError";
 
-const NAMESPACE = "Server";
+const Debug = Debuger("Routes");
 const router = express();
 
-/** Logging the request */
+/** Debug the request */
 router.use((req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
+  Debug.log(`METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
 
   res.on("finish", () => {
-    logging.info(
-      NAMESPACE,
+    Debug.log(
       `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`
     );
   });
@@ -52,5 +52,5 @@ router.use(apiErrorHandler);
 /** Create the server */
 const httpServer = http.createServer(router);
 httpServer.listen(config.server.port, () => {
-  logging.info(NAMESPACE, `Server running on http://${config.server.hostname}:${config.server.port}`);
+  Debug.info(`Server running on http://${config.server.hostname}:${config.server.port}`);
 });

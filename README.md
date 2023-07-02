@@ -18,13 +18,11 @@
 
 * Create a **.env** file on the root folder
 * add the folowing *DATABASE_URL=mysql://***<username>***:***<password>***@***<url>***:***<port>***/***<database>***?sslmode=disable*
-  > **EX**: *DATABASE_URL=mysql://root:root@database:3306/mydatabase?sslmode=disable*
-
-  > **DISCLAIMER**: The url must be the same as the link name on the **docker-compose.yml** (more on that later) 
+  > **EX**: *DATABASE_URL=mysql://root:root@localhost:3306/mydatabase?sslmode=disable*
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer and [Docker](https://www.docker.com). From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer and [Docker](https://www.docker.com) *(Optional)*. From your command line:
 
 ```bash
 # Clone this repository
@@ -32,8 +30,15 @@ $ git clone https://github.com/GEYWYD/frost-api
 
 # Go into the repository
 $ cd frost-api
+
+# Setup prisma Client
+$ npx prisma generate
+
 # Create docker containers
 $ docker-compose up
+
+# Migrate database
+$ npx prisma migrate dev
 
 ```
 
@@ -41,7 +46,9 @@ $ docker-compose up
 > If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
 ## Docker
-Remember when i said that the url on the **DATABASE_URL** need to be the same as the link name on the **docker-compose.yml**? Well, here it is:
+**This step is completely optional if you have a Database running in your computer.**
+
+The only inportant part here is to define the right port, a password and you'r Database of choise, in this case i'm using MySql.
 
 ```yml
 version: '3.9'
@@ -49,26 +56,10 @@ version: '3.9'
 services:
   db:
     image: mysql:latest
-    container_name: database
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - '3306:3306'
-
-  app:
-    container_name: 'api'
-    build: .
-    command: npm start
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/app
-
-    links:
-      #THIS RIGHT HERE IS THE LINK#
-      #WE HAVE THE CONTAINER'S NAME AND AFTER THAT THE LINK NAME#
-      - "db:database"
 
 ```
 
