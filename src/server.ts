@@ -1,12 +1,19 @@
 import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
-import config from "config";
+import swaggerUi from "swagger-ui-express";
+import config from "./config";
 
-import Debuger from "debuger"
+import Debuger from "./debuger";
 
-import routes from "routes";
-import apiErrorHandler from "middlewares/api_error_handler";
-import ApiError from "error/ApiError";
+import routes from "./routes";
+import apiErrorHandler from "./middlewares/api_error_handler";
+import ApiError from "./errors/ApiError";
+import fs from "fs";
+
+import YAML from "yaml";
+
+const docsFile = fs.readFileSync("src/swagger.yaml", "utf8");
+const swaggerDocs = YAML.parse(docsFile);
 
 const Debug = Debuger("Routes");
 const app = express();
@@ -20,6 +27,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
       `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`
     );
   });
+  console.log('\n');
+  
   next();
 });
 
@@ -31,19 +40,24 @@ app.use(express.json());
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
   );
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
 
-  if (req.method == "OPTIONS") {
-    return res.status(200).json({ options: ["POST", "GET", "OPTIONS", "DELETE", "PUT"] });
-  }
   next();
 });
 
-/** Config app */
+/** Define Swagger Documentation route */
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+/** Allow external applications to request the API's allowed options */
+app.options("/", (req: Request, res: Response) => res.end());
+
+/** Import routes from 'routes.ts' file */
 app.use("/", routes);
 
 /** Error Handling */
@@ -54,5 +68,5 @@ app.use(apiErrorHandler);
 
 /** Create the server */
 app.listen(config.server.port, () => {
-  Debug.info(`Server running on http://${config.server.hostname}:${config.server.port}`);
+  Debug.info(`Server running on port ${config.server.port}`);
 });
